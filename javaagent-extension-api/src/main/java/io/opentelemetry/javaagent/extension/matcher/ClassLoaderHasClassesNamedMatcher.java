@@ -18,8 +18,8 @@ class ClassLoaderHasClassesNamedMatcher extends ElementMatcher.Junction.Abstract
   /**
    * Controls whether classloader-match results are cached per ClassLoader instance.
    *
-   * <p>Cache is enabled by default. Set the JVM system property
-   * {@code -Dotel.javaagent.classloader-matcher.cache.disabled=true} to disable it.
+   * <p>Cache is enabled by default. Set the JVM system property {@code
+   * -Dotel.javaagent.classloader-matcher.cache.disabled=true} to disable it.
    *
    * <p>This field is also set to {@code false} via reflection by {@code ClassLoaderMatcher} during
    * the build-time muzzle check path.
