@@ -15,10 +15,20 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
 import net.bytebuddy.matcher.ElementMatcher;
 
 class ClassLoaderHasClassesNamedMatcher extends ElementMatcher.Junction.AbstractBase<ClassLoader> {
-  // caching is disabled for build time muzzle checks
-  // this field is set via reflection from ClassLoaderMatcher
-  @SuppressWarnings("FieldCanBeFinal") // set via reflection from muzzle ClassLoaderMatcher
-  private static boolean useCache = true;
+  /**
+   * Controls whether classloader-match results are cached per ClassLoader instance.
+   *
+   * <p>Cache is enabled by default. Set the JVM system property
+   * {@code -Dotel.javaagent.classloader-matcher.cache.disabled=true} to disable it.
+   *
+   * <p>This field is also set to {@code false} via reflection by {@code ClassLoaderMatcher} during
+   * the build-time muzzle check path.
+   */
+  @SuppressWarnings("FieldCanBeFinal") // set to false via reflection from muzzle ClassLoaderMatcher
+  private static boolean useCache =
+      !"true"
+          .equalsIgnoreCase(
+              System.getProperty("otel.javaagent.classloader-matcher.cache.disabled"));
 
   private static final AtomicInteger counter = new AtomicInteger();
 
