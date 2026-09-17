@@ -1963,21 +1963,6 @@ definitions:
         type: STRING
       - name: server.port
         type: LONG
-    db.client.operation.duration-f0613d87:
-      name: db.client.operation.duration
-      description: Duration of database client operations.
-      instrument: histogram
-      data_type: HISTOGRAM
-      unit: s
-      attributes:
-      - name: db.collection.name
-        type: STRING
-      - name: db.operation.name
-        type: STRING
-      - name: db.system.name
-        type: STRING
-      - name: server.address
-        type: STRING
     db.client.operation.duration-fce1854c:
       name: db.client.operation.duration
       description: Duration of database client operations.
@@ -9327,7 +9312,7 @@ libraries:
         type: LONG
   - when: otel.semconv-stability.opt-in=database
     metric_refs:
-    - db.client.operation.duration-f0613d87
+    - db.client.operation.duration-5d89ffb2
     spans:
     - span_kind: CLIENT
       attributes:
